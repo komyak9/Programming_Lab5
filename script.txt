@@ -1,0 +1,4 @@
+help
+executeScript script.txt
+show
+printDescending

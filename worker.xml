@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workers>
+    <worker>
+        <name>Angela</name>
+        <coordinates>
+            <x>23</x>
+            <y>65</y>
+        </coordinates>
+        <salary>1834.0</salary>
+        <startDate>1986-04-08 12:30</startDate>
+        <endDate>01-03-2017</endDate>
+        <position>MANAGER</position>
+        <organization>
+            <annualTurnover>87952</annualTurnover>
+            <type>PUBLIC</type>
+            <address>
+                <zipCode>3333333</zipCode>
+                <location>
+                    <x>547</x>
+                    <y>545</y>
+                    <name>1st company</name>
+                </location>
+            </address>
+        </organization>
+    </worker>
+    <worker>
+        <name>Mikhail</name>
+        <coordinates>
+            <x>88</x>
+            <y>88</y>
+        </coordinates>
+        <salary>1400.9</salary>
+        <startDate>1986-04-08 12:30</startDate>
+        <endDate>01-03-2008</endDate>
+        <position>MANAGER</position>
+        <organization>
+            <annualTurnover>88888</annualTurnover>
+            <type>PUBLIC</type>
+            <address>
+                <zipCode>3333333</zipCode>
+                <location>
+                    <x>547</x>
+                    <y>545</y>
+                    <name>2nd company</name>
+                </location>
+            </address>
+        </organization>
+    </worker>
+    <worker>
+        <name>Mikhail</name>
+        <coordinates>
+            <x>88</x>
+            <y>88</y>
+        </coordinates>
+        <salary>1400.9</salary>
+        <startDate>1986-04-08 12:30</startDate>
+        <endDate>01-03-2008</endDate>
+        <position>MANAGER</position>
+        <organization>
+            <annualTurnover>88888</annualTurnover>
+            <type>PUBLIC</type>
+            <address>
+                <zipCode>3333333</zipCode>
+                <location>
+                    <x>547</x>
+                    <y>545</y>
+                    <name>2nd company</name>
+                </location>
+            </address>
+        </organization>
+    </worker>
+</workers>
