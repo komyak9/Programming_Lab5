@@ -2,8 +2,8 @@
 *obj3
 Debug/
 __history/
-.idea/
+.idea
 *.iml
-out/
+out
 ~/*.class
 Win32/
