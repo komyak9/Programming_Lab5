@@ -5,4 +5,5 @@ Debug/
 __history/
 .idea
 *.iml
-out.production.lab5
+out
+
