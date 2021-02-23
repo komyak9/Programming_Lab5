@@ -3,7 +3,7 @@
 Win32/
 Debug/
 __history/
-.idea
+.idea/
 *.iml
-out
+out/
 
