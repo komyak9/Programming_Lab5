@@ -5,4 +5,5 @@ __history/
 .idea/
 *.iml
 out/
+*.class
 Win32/
