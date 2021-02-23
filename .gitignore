@@ -1,9 +1,3 @@
-*~
-*obj3
-Debug/
-__history/
-.idea
 *.iml
 out
-~/*.class
-Win32/
+.idea
