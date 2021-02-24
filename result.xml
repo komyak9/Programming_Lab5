@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workers>
+	<worker>
+		<id>-996248940</id>
+		<creationDate>2021-02-24T12:54:59.641131700+02:00[Europe/Kiev]</creationDate>
+		<name>Angela</name>
+		<coordinates>
+			<x>23</x>
+			<y>65</y>
+		</coordinates>
+		<salary>1834.0</salary>
+		<startDate>1986-04-08T12:30</startDate>
+		<endDate>Wed Mar 01 00:00:00 EET 2017</endDate>
+		<position>MANAGER</position>
+		<organization>
+			<zipCode>'3333333'</zipCode>
+			<location>
+				<x>547</x>
+				<y>545</y>
+				<name>'1st company'</name>
+			</location>
+		</organization>
+	</worker>
+	<worker>
+		<id>1900199145</id>
+		<creationDate>2021-02-24T12:54:59.644133500+02:00[Europe/Kiev]</creationDate>
+		<name>Mikhail</name>
+		<coordinates>
+			<x>88</x>
+			<y>88</y>
+		</coordinates>
+		<salary>1400.9</salary>
+		<startDate>1986-04-08T12:30</startDate>
+		<endDate>Sat Mar 01 00:00:00 EET 2008</endDate>
+		<position>MANAGER</position>
+		<organization>
+			<zipCode>'3333333'</zipCode>
+			<location>
+				<x>547</x>
+				<y>545</y>
+				<name>'2nd company'</name>
+			</location>
+		</organization>
+	</worker>
+	<worker>
+		<id>1476779469</id>
+		<creationDate>2021-02-24T12:54:59.645132600+02:00[Europe/Kiev]</creationDate>
+		<name>Mikhail</name>
+		<coordinates>
+			<x>88</x>
+			<y>88</y>
+		</coordinates>
+		<salary>1400.9</salary>
+		<startDate>1986-04-08T12:30</startDate>
+		<endDate>Sat Mar 01 00:00:00 EET 2008</endDate>
+		<position>MANAGER</position>
+		<organization>
+			<zipCode>'3333333'</zipCode>
+			<location>
+				<x>547</x>
+				<y>545</y>
+				<name>'2nd company'</name>
+			</location>
+		</organization>
+	</worker>
+</workers>
