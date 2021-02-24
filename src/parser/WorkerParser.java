@@ -106,10 +106,15 @@ public class WorkerParser {
         Field[] fields = worker.getClass().getDeclaredFields();
         String data = "";
         data += "Element name: " + worker.getClass() + "\n";
+        String lineToAdd = "";
         for (Field field : fields) {
             if (Modifier.isPrivate(field.getModifiers())) {
                 field.setAccessible(true);
-                data += "Tag: " + field.getName() + ", value: " + field.get(worker) + '\n';
+                lineToAdd = "Tag: " + field.getName() + ", value: " + field.get(worker) + '\n';
+                if (lineToAdd.contains("town")) {
+                    lineToAdd = lineToAdd.replace("town", "location");
+                }
+                data += lineToAdd;
             }
         }
         ObjectToXMLParser parser = new ObjectToXMLParser();
