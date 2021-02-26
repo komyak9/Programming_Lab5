@@ -5,19 +5,15 @@ public class Location {
     private int y;
     private String name; //Длина строки не должна быть больше 429, Поле может быть null
 
-    public Location(Integer x, int y, String name) {
-        try {
-            if (x == null)
-                throw new Exception("Error. \"x\" can't be null.");
-            else if (name == null)
-                throw new Exception("Error. Name of the location can't be null.");
+    public Location(Integer x, int y, String name) throws Exception {
+        if (x == null)
+            throw new Exception("Error. \"x\" can't be null.");
+        else if (name == null)
+            throw new Exception("Error. Name of the location can't be null.");
 
-            setX(x);
-            setY(y);
-            setName(name);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        setX(x);
+        setY(y);
+        setName(name);
     }
 
     public Integer getX() {
@@ -40,15 +36,11 @@ public class Location {
         return name;
     }
 
-    public void setName(String name) {
-        try {
-            if (name.length() <= 429) {
-                this.name = name;
-            } else {
-                throw new Exception("Wrong length. Name length must me <= 429.");
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+    public void setName(String name) throws Exception {
+        if (name.length() <= 429) {
+            this.name = name;
+        } else {
+            throw new Exception("Wrong length. Name length must me <= 429.");
         }
     }
 

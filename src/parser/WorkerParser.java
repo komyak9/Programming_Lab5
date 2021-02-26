@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class WorkerParser {
-    public LinkedList<Worker> parseXMLToObject(File file) throws FileNotFoundException {
+    public LinkedList<Worker> parseXMLToObject(File file) throws Exception {
         Scanner scanner = new Scanner(file);
         LinkedList<String> data = new LinkedList<>();
         XMLToObjectParser parser = new XMLToObjectParser();
@@ -97,7 +97,7 @@ public class WorkerParser {
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Error in xml file data. Please, check the data in the file.");
+            throw ex;
         }
         return result;
     }

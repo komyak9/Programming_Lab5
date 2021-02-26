@@ -5,35 +5,26 @@ public class Organization {
     private OrganizationType type; //Поле не может быть null
     private Address officialAddress; //Поле не может быть null
 
-    public Organization(int annualTurnover, OrganizationType type, Address address) {
-        try {
-            if (type == null)
-                throw new Exception("Error. Type of the organization can't be null.");
-            else if (address == null)
-                throw new Exception("Error. content.content.Address of the organization can't be null.");
+    public Organization(int annualTurnover, OrganizationType type, Address address) throws Exception {
+        if (type == null)
+            throw new Exception("Error. Type of the organization can't be null.");
+        else if (address == null)
+            throw new Exception("Error. content.content.Address of the organization can't be null.");
 
-            setAnnualTurnover(annualTurnover);
-            setType(type);
-            setOfficialAddress(address);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        setAnnualTurnover(annualTurnover);
+        setType(type);
+        setOfficialAddress(address);
     }
 
     public int getAnnualTurnover() {
         return annualTurnover;
     }
 
-    public void setAnnualTurnover(int annualTurnover) {
-        try {
-            if (annualTurnover > 6) {
-                this.annualTurnover = annualTurnover;
-            } else {
-                throw new Exception("Value is not suitable. Annual turnover must be > 0.");
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+    public void setAnnualTurnover(int annualTurnover) throws Exception {
+        if (annualTurnover > 6)
+            this.annualTurnover = annualTurnover;
+        else
+            throw new Exception("Value is not suitable. Annual turnover must be > 0.");
     }
 
     public OrganizationType getType() {

@@ -17,12 +17,12 @@ public class WorkerManager {
                 "\t\tSalary: " + worker.getSalary() +
                 "\t\tStart date: " + worker.getStartDate() +
                 "\t\tEnd date: " + worker.getEndDate() +
-                "\t\tcontent.Position: " + worker.getPosition() +
-                "\t\tcontent.Organization: " + worker.getOrganization().getType() +
+                "\t\tPosition: " + worker.getPosition() +
+                "\t\tOrganization: " + worker.getOrganization().getType() +
                 ", name: " + worker.getOrganization().getOfficialAddress().getTown().getName();
     }
 
-    public Worker createWorker() throws ParseException {
+    public Worker createWorker() throws Exception {
         String workerName;
         Coordinates coordinates;
         long coordinatesX;

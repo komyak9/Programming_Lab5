@@ -15,7 +15,7 @@ import java.util.*;
 public class CollectionManager {
     private final HashMap<String, String> commands = new HashMap<>();
     private final WorkerManager workerManager = new WorkerManager();
-    private LinkedList<Worker> workersList;
+    private LinkedList<Worker> workersList = new LinkedList<>();
     private File file;
     private CollectionInfo collectionInfo;
 
@@ -323,9 +323,13 @@ public class CollectionManager {
     }
 
     public void fillCollection() throws FileNotFoundException {
-        WorkerParser workerParser = new WorkerParser();
-        workersList = workerParser.parseXMLToObject(file);
-        collectionInfo = new CollectionInfo("Linked List", Calendar.getInstance().getTime(), workersList.size());
-        System.out.println("Data from the file was successfully downloaded.");
+        try {
+            WorkerParser workerParser = new WorkerParser();
+            workersList = workerParser.parseXMLToObject(file);
+            collectionInfo = new CollectionInfo("Linked List", Calendar.getInstance().getTime(), workersList.size());
+            System.out.println("Data from the file was successfully downloaded.");
+        }catch (Exception ex){
+            System.out.println("Error in xml file data. Please, check the data in the file.");
+        }
     }
 }

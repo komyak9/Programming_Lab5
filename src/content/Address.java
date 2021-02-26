@@ -4,33 +4,25 @@ public class Address {
     private String zipCode; //Длина строки должна быть не меньше 6, Поле не может быть null
     private Location town; //Поле не может быть null
 
-    public Address(String zipCode, Location town) {
-        try {
-            if (zipCode == null)
-                throw new Exception("Error. Zip code can't be null.");
-            else if (town == null)
-                throw new Exception("Error. content.content.Location can't be null.");
+    public Address(String zipCode, Location town) throws Exception {
+        if (zipCode == null)
+            throw new Exception("Error. Zip code can't be null.");
+        else if (town == null)
+            throw new Exception("Error. content.content.Location can't be null.");
 
-            setZipCode(zipCode);
-            setTown(town);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        setZipCode(zipCode);
+        setTown(town);
     }
 
     public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
-        try {
-            if (zipCode.length() >= 6)
-                this.zipCode = zipCode;
-            else
-                throw new Exception("Length is not suitable. Zip code must has >= 6 symbols.");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+    public void setZipCode(String zipCode) throws Exception {
+        if (zipCode.length() >= 6)
+            this.zipCode = zipCode;
+        else
+            throw new Exception("Length is not suitable. Zip code must has >= 6 symbols.");
     }
 
     public Location getTown() {
@@ -43,7 +35,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "content.content.Address{" +
+        return "Address{" +
                 "zipCode='" + zipCode + '\'' +
                 ", town=" + town +
                 '}';

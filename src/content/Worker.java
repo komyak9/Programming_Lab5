@@ -16,30 +16,27 @@ public class Worker implements Comparable<Worker> {
     private Position position; //Поле не может быть null
     private Organization organization; //Поле не может быть null
 
-    public Worker(String name, Coordinates coordinates, float salary, LocalDateTime startDate, Date endDate, Position position, Organization organization) {
+    public Worker(String name, Coordinates coordinates, float salary, LocalDateTime startDate, Date endDate, Position position, Organization organization) throws Exception {
         creationDate = ZonedDateTime.now();
-        try {
-            if (name == null)
-                throw new Exception("Error. Name of the worker can't be null.");
-            else if (coordinates == null)
-                throw new Exception("Error. content.content.Coordinates of the worker can't be null.");
-            else if (startDate == null)
-                throw new Exception("Error. Start date of the worker can't be null.");
-            else if (position == null)
-                throw new Exception("Error. content.content.Position of the worker can't be null.");
-            else if (organization == null)
-                throw new Exception("Error. content.content.Organization of the worker can't be null.");
 
-            setName(name);
-            setCoordinates(coordinates);
-            setSalary(salary);
-            setStartDate(startDate);
-            setEndDate(endDate);
-            setPosition(position);
-            setOrganization(organization);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage() + " Please, add info and try again.");
-        }
+        if (name == null)
+            throw new Exception("Error. Name of the worker can't be null.");
+        else if (coordinates == null)
+            throw new Exception("Error. Coordinates of the worker can't be null.");
+        else if (startDate == null)
+            throw new Exception("Error. Start date of the worker can't be null.");
+        else if (position == null)
+            throw new Exception("Error. Position of the worker can't be null.");
+        else if (organization == null)
+            throw new Exception("Error. Organization of the worker can't be null.");
+
+        setName(name);
+        setCoordinates(coordinates);
+        setSalary(salary);
+        setStartDate(startDate);
+        setEndDate(endDate);
+        setPosition(position);
+        setOrganization(organization);
         id = this.hashCode();
     }
 
@@ -63,15 +60,11 @@ public class Worker implements Comparable<Worker> {
         return name;
     }
 
-    public void setName(String name) {
-        try {
-            if (name.equals("")) {
-                throw new Exception("Error. content.content.Worker's name can't be empty.");
-            } else
-                this.name = name;
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+    public void setName(String name) throws Exception {
+        if (name.equals(""))
+            throw new Exception("Error. Worker's name can't be empty.");
+        else
+            this.name = name;
     }
 
     public Coordinates getCoordinates() {
@@ -120,6 +113,6 @@ public class Worker implements Comparable<Worker> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, coordinates, creationDate, salary, startDate, endDate, position, organization);
+        return Objects.hash(creationDate);
     }
 }
