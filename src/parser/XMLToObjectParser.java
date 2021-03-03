@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Класс для преобразования xml-строк в данные объекта.
+ * @autor komyak9
+ */
 public class XMLToObjectParser {
     public String getSingleValue(String keyWord, String string) {
         Pattern pattern = Pattern.compile(">.*?<");
@@ -13,9 +17,8 @@ public class XMLToObjectParser {
         String result = "";
 
         if (string.contains('<' + keyWord + '>') && string.contains("</" + keyWord + '>')) {
-            while (matcher.find()) {
+            while (matcher.find())
                 result = string.substring(matcher.start(), matcher.end());
-            }
         }
         return result.substring(1, result.length() - 1);
     }

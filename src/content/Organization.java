@@ -1,5 +1,9 @@
 package content;
 
+/**
+ * Класс для хранения информации об организации.
+ * @autor komyak9
+ */
 public class Organization {
     private int annualTurnover; //Значение поля должно быть больше 0
     private OrganizationType type; //Поле не может быть null
@@ -21,7 +25,7 @@ public class Organization {
     }
 
     public void setAnnualTurnover(int annualTurnover) throws Exception {
-        if (annualTurnover > 6)
+        if (annualTurnover > 0)
             this.annualTurnover = annualTurnover;
         else
             throw new Exception("Value is not suitable. Annual turnover must be > 0.");
@@ -45,7 +49,7 @@ public class Organization {
 
     @Override
     public String toString() {
-        return "content.content.Organization{" +
+        return "Organization{" +
                 "annualTurnover=" + annualTurnover +
                 ", type=" + type +
                 ", officialAddress=" + officialAddress +

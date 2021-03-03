@@ -1,9 +1,13 @@
-package managering.instruments;
+package manager.instruments;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Класс для хранения данных о коллекции.
+ * @autor komyak9
+ */
 public class CollectionInfo {
     private final String type;
     private final Date startDate;

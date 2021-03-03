@@ -3,8 +3,11 @@ package content;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.Objects;
 
+/**
+ * Класс для хранения информации о работнике.
+ * @autor komyak9
+ */
 public class Worker implements Comparable<Worker> {
     private final Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private final ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -16,8 +19,8 @@ public class Worker implements Comparable<Worker> {
     private Position position; //Поле не может быть null
     private Organization organization; //Поле не может быть null
 
-    public Worker(String name, Coordinates coordinates, float salary, LocalDateTime startDate, Date endDate, Position position, Organization organization) throws Exception {
-        creationDate = ZonedDateTime.now();
+    public Worker(Integer id, ZonedDateTime creationDate, String name, Coordinates coordinates, float salary, LocalDateTime startDate, Date endDate, Position position, Organization organization) throws Exception {
+        this.creationDate = creationDate;
 
         if (name == null)
             throw new Exception("Error. Name of the worker can't be null.");
@@ -37,11 +40,11 @@ public class Worker implements Comparable<Worker> {
         setEndDate(endDate);
         setPosition(position);
         setOrganization(organization);
-        id = this.hashCode();
+        this.id = id;
     }
 
     public int compareTo(Worker worker) {
-        return id.compareTo(worker.getId());
+        return name.compareTo(worker.getName());
     }
 
     public int getId() {
@@ -52,7 +55,9 @@ public class Worker implements Comparable<Worker> {
         return salary;
     }
 
-    public void setSalary(float salary) {
+    public void setSalary(float salary) throws Exception {
+        if (salary <= 0)
+            throw new Exception("Salary can't be 0 or lower.");
         this.salary = salary;
     }
 
@@ -111,8 +116,5 @@ public class Worker implements Comparable<Worker> {
         this.organization = organization;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(creationDate);
-    }
+
 }

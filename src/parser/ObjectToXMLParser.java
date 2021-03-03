@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Класс-парсер для преобразования полей в строки xml.
+ * @autor komyak9
+ */
 public class ObjectToXMLParser {
     private void writeSingleElement(File file, String tag, String value, int tabCount) throws IOException {
         String line = "\t".repeat(tabCount) + '<' + tag + '>' + value + "</" + tag + ">\n";

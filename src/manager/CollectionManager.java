@@ -1,10 +1,11 @@
-package managering;
+package manager;
 
 import content.Position;
 import content.Worker;
-import managering.instruments.CollectionInfo;
-import managering.instruments.WorkerManager;
-import parser.WorkerParser;
+import manager.instruments.CollectionInfo;
+import manager.instruments.workerInstruments.WorkerIdHolder;
+import manager.instruments.workerInstruments.WorkerManager;
+import manager.instruments.workerInstruments.WorkerParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,10 +13,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Класс для работы с коллекцией.
+ * @autor komyak9
+ */
 public class CollectionManager {
     private final HashMap<String, String> commands = new HashMap<>();
     private final WorkerManager workerManager = new WorkerManager();
-    private LinkedList<Worker> workersList = new LinkedList<>();
+    private LinkedList<Worker> workersList;
     private File file;
     private CollectionInfo collectionInfo;
 
@@ -25,17 +30,17 @@ public class CollectionManager {
         commands.put("show", "Print collection's elements");
         commands.put("add", "Add a new elements to the collection");
         commands.put("update", "Update an element with the given id");
-        commands.put("removeById", "Remove an elements with the given id");
+        commands.put("remove_by_id", "Remove an elements with the given id");
         commands.put("clear", "Remove all the elements of the collection");
         commands.put("save", "Save the collection to the file");
-        commands.put("executeScript", "Read the file and do the script");
+        commands.put("execute_script", "Read the file and do the script");
         commands.put("exit", "Finish the program");
-        commands.put("addIfMax", "Add a new element if it has the highest value");
-        commands.put("addIfMin", "Add a new element if it has the lowest value");
-        commands.put("removeGreater", "Remove all the elements that are higher than this one");
-        commands.put("removeAllByPosition", "Remove all the elements with the same position");
-        commands.put("removeAnyBySalary", "Remove the element due to the salary");
-        commands.put("printDescending", "Print the elements from max to min");
+        commands.put("add_if_max", "Add a new element if it has the highest value");
+        commands.put("add_if_min", "Add a new element if it has the lowest value");
+        commands.put("remove_greater", "Remove all the elements that are higher than this one");
+        commands.put("remove_all_by_position", "Remove all the elements with the same position");
+        commands.put("remove_any_by_salary", "Remove the element due to the salary");
+        commands.put("print_descending", "Print the elements from max to min");
     }
 
     public CollectionManager(String fileName) throws FileNotFoundException {
@@ -74,52 +79,38 @@ public class CollectionManager {
         }
     }
 
-    public void add() {
+    public void add(Scanner scanner) {
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter an id: ");
-            int id = scanner.nextInt();
-            for (Worker worker : workersList) {
-                if (worker.getId() == id) {
-                    throw new Exception("content.content.Worker with such id is already exists.");
-                }
-            }
-            workersList.add(workerManager.createWorker());
+            workersList.add(workerManager.createWorker(scanner));
             System.out.println("New worker was successfully added to the collection.");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void update() {
+    public void update(int id, Scanner scanner) {
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter id for the update: ");
-            int id = scanner.nextInt();
-
-            boolean isPresent = false;
-            for (int i = 0; i < workersList.size(); i++) {
-                if (workersList.get(i).getId() == id) {
-                    isPresent = true;
-                    workersList.set(i, workerManager.createWorker());
-                    System.out.println("The element has been updated.");
+            if (WorkerIdHolder.getIdSet().contains(id)) {
+                for (int i = 0; i < workersList.size(); i++) {
+                    if (workersList.get(i).getId() == id) {
+                        WorkerIdHolder.remove(id);
+                        workersList.set(i, workerManager.createWorker(scanner));
+                        System.out.println("The element has been updated.");
+                        break;
+                    }
                 }
-            }
-            if (!isPresent)
+            } else
                 throw new Exception("There is no such element in the list.");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void removeById() {
+    public void removeById(int id) {
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter id for the removing: ");
-            int id = scanner.nextInt();
-
-            if (workersList.contains(workersList.get(id))) {
+            if (WorkerIdHolder.getIdSet().contains(id)) {
                 workersList.remove(id);
+                WorkerIdHolder.remove(id);
                 System.out.println("The element has been removed.");
             } else
                 throw new Exception("There is no such element in the list.");
@@ -132,6 +123,7 @@ public class CollectionManager {
         try {
             if (!workersList.isEmpty()) {
                 workersList.clear();
+                WorkerIdHolder.clear();
                 System.out.println("The collection has been cleared.");
             } else
                 throw new Exception("The collection is already empty.");
@@ -162,7 +154,7 @@ public class CollectionManager {
 
     public void executeScript(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
-        String command;
+        String command = "";
 
         while (scanner.hasNextLine()) {
             String[] input = scanner.nextLine().trim().split(" ", 2);
@@ -173,30 +165,31 @@ public class CollectionManager {
                     case "help" -> this.help();
                     case "info" -> this.info();
                     case "show" -> this.show();
-                    case "add" -> this.add();
-                    case "update" -> this.update();
-                    case "removeById" -> this.removeById();
+                    case "add" -> this.add(scanner);
+                    case "update" -> this.update(Integer.parseInt(input[1]), scanner);
+                    case "remove_by_id" -> this.removeById(Integer.parseInt(input[1]));
                     case "clear" -> this.clear();
                     case "save" -> this.save();
-                    case "executeScript" -> {
+                    case "execute_script" -> {
                         if (!file.equals(new File(input[1])))
                             this.executeScript(new File(input[1]));
                         else
                             throw new Exception("Recursion alert. Can't execute the script that currently is being executed.");
                     }
                     case "exit" -> this.exit();
-                    case "addIfMax" -> this.addIfMax();
-                    case "addIfMin" -> this.addIfMin();
-                    case "removeGreater" -> this.removeGreater();
-                    case "removeAllByPosition" -> this.removeAllByPosition(Position.valueOf(input[1]));
-                    case "removeAnyBySalary" -> this.removeAnyBySalary(Float.parseFloat(input[1]));
-                    case "printDescending" -> this.printDescending();
+                    case "add_if_max" -> this.addIfMax(scanner);
+                    case "add_if_min" -> this.addIfMin(scanner);
+                    case "remove_greater" -> this.removeGreater(scanner);
+                    case "remove_all_by_position" -> this.removeAllByPosition(Position.valueOf(input[1]));
+                    case "remove_any_by_salary" -> this.removeAnyBySalary(Float.parseFloat(input[1]));
+                    case "print_descending" -> this.printDescending();
                     default -> throw new Exception("There is no such command.");
                 }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
         }
+        scanner.close();
     }
 
     public void exit() {
@@ -204,65 +197,50 @@ public class CollectionManager {
         System.exit(0);
     }
 
-    public void addIfMax() {
+    public void addIfMax(Scanner scanner) {
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter an id: ");
-            int id = scanner.nextInt();
+            Worker worker = workerManager.createWorker(scanner);
 
-            for (Worker worker : workersList) {
-                if (worker.getId() == id)
-                    throw new Exception("content.content.Worker with such id is already exists.");
-                else if (worker.getId() > id) {
-                    throw new Exception("The element is not the max.");
-                }
-            }
-            workersList.add(workerManager.createWorker());
+            if (worker.compareTo(Collections.max(workersList)) > 0)
+                workersList.add(worker);
+            else
+                throw new Exception("The element is not the max.");
+
             System.out.println("New worker was successfully added to the collection.");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void addIfMin() {
+    public void addIfMin(Scanner scanner) {
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter an id: ");
-            int id = scanner.nextInt();
+            Worker worker = workerManager.createWorker(scanner);
 
-            for (Worker worker : workersList) {
-                if (worker.getId() == id)
-                    throw new Exception("content.content.Worker with such id is already exists.");
-                else if (worker.getId() < id) {
-                    throw new Exception("The element is not the min.");
-                }
-            }
-            workersList.add(workerManager.createWorker());
+            if (worker.compareTo(Collections.min(workersList)) < 0)
+                workersList.add(worker);
+            else
+                throw new Exception("The element is not the min.");
+
             System.out.println("New worker was successfully added to the collection.");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void removeGreater() {
+    public void removeGreater(Scanner scanner) {
         try {
-            System.out.println("Enter an id: ");
-            Worker comparingWorker = workerManager.createWorker();
+            Worker worker = workerManager.createWorker(scanner);
             boolean hasGreater = false;
 
-            for (Worker worker : workersList) {
-                if (worker.compareTo(comparingWorker) > 0) {
-                    hasGreater = true;
-                    break;
-                }
+            while (worker.compareTo(Collections.max(workersList)) <= 0) {
+                WorkerIdHolder.remove(Collections.max(workersList).getId());
+                workersList.remove(Collections.max(workersList));
+                hasGreater = true;
             }
-
             if (!hasGreater)
                 throw new Exception("There is no greater element. Nothing to remove.");
-            else {
-                workersList.removeIf(worker -> worker.compareTo(comparingWorker) > 0);
+            else
                 System.out.println("The elements have been removed.");
-            }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -274,13 +252,14 @@ public class CollectionManager {
             for (Worker worker : workersList) {
                 if (worker.getPosition() == position) {
                     isPresent = true;
+                    WorkerIdHolder.remove(worker.getId());
                     workersList.remove(worker);
                 }
             }
-            if (isPresent)
-                System.out.println("The element has been removed.");
-            else
+            if (!isPresent)
                 throw new Exception("There is no worker with such position.");
+            else
+                System.out.println("The elements have been removed.");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -293,13 +272,13 @@ public class CollectionManager {
             for (Worker worker : workersList) {
                 if (worker.getSalary() == salary) {
                     isPresent = true;
+                    WorkerIdHolder.remove(worker.getId());
                     workersList.remove(worker);
+                    System.out.println("The element has been removed.");
                     break;
                 }
             }
-            if (isPresent)
-                System.out.println("The element has been removed.");
-            else
+            if (!isPresent)
                 throw new Exception("There is no worker with such salary.");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -325,10 +304,11 @@ public class CollectionManager {
     public void fillCollection() throws FileNotFoundException {
         try {
             WorkerParser workerParser = new WorkerParser();
-            workersList = workerParser.parseXMLToObject(file);
+            workersList = workerParser.getWorkersList(file);
             collectionInfo = new CollectionInfo("Linked List", Calendar.getInstance().getTime(), workersList.size());
             System.out.println("Data from the file was successfully downloaded.");
-        }catch (Exception ex){
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             System.out.println("Error in xml file data. Please, check the data in the file.");
         }
     }

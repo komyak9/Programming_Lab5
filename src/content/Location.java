@@ -1,5 +1,9 @@
 package content;
 
+/**
+ * Класс для хранения места нахождения компании/рабочего места.
+ * @autor komyak9
+ */
 public class Location {
     private Integer x; //Поле не может быть null
     private int y;
@@ -8,8 +12,6 @@ public class Location {
     public Location(Integer x, int y, String name) throws Exception {
         if (x == null)
             throw new Exception("Error. \"x\" can't be null.");
-        else if (name == null)
-            throw new Exception("Error. Name of the location can't be null.");
 
         setX(x);
         setY(y);
@@ -46,7 +48,7 @@ public class Location {
 
     @Override
     public String toString() {
-        return "content.content.Location{" +
+        return "Location{" +
                 "x=" + x +
                 ", y=" + y +
                 ", name='" + name + '\'' +

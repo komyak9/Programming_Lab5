@@ -1,5 +1,9 @@
 package content;
 
+/**
+ * Класс для хранения места нахождения работника.
+ * @autor komyak9
+ */
 public class Coordinates {
     private long x; //Значение поля должно быть больше -690
     private int y; //Значение поля должно быть больше -247
@@ -33,7 +37,7 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return "content.content.Coordinates{" +
+        return "Coordinates{" +
                 "x=" + x +
                 ", y=" + y +
                 '}';

@@ -1,5 +1,9 @@
 package content;
 
+/**
+ * Класс для хранения адреса места работы работника.
+ * @autor komyak9
+ */
 public class Address {
     private String zipCode; //Длина строки должна быть не меньше 6, Поле не может быть null
     private Location town; //Поле не может быть null
