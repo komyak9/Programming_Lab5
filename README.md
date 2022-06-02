@@ -44,7 +44,7 @@ exit : exit the program (without saving to a file)
 6. To enter null values, use an empty string.
 7. Fields with the comment "The value of this field should be generated automatically" should not be entered manually by the user when adding.
 
-Additional task (DONE): write java object <-> xml file parser.
+Additional task (DONE): write a java object <-> xml file parser.
 
 #### Description of the classes stored in the collection:
 
