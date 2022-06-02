@@ -17,22 +17,22 @@ The collection must store objects of the Worker class, the description of which 
 
 #### In interactive mode, the program must support the execution of the following commands:
 
-help : show help for available commands
-info : print information about the collection to standard output (type, initialization date, number of elements, etc.)
-show : print to standard output all elements of the collection in string representation
-add {element} : add a new element to the collection
-update id {element} : update the value of the collection element whose id is equal to the given one
-remove_by_id id : remove an element from the collection by its id
-clear : clear the collection
-save : save the collection to a file
-execute_script file_name : read and execute script from specified file. The script contains commands in the same form in which they are entered by the user in interactive mode.
+1. help : show help for available commands
+2. info : print information about the collection to standard output (type, initialization date, number of elements, etc.)
+3. show : print to standard output all elements of the collection in string representation
+4. add {element} : add a new element to the collection
+5. update id {element} : update the value of the collection element whose id is equal to the given one
+6. remove_by_id id : remove an element from the collection by its id
+7. clear : clear the collection
+8. save : save the collection to a file
+9. execute_script file_name : read and execute script from specified file. The script contains commands in the same form in which they are entered by the user in interactive mode.
 exit : exit the program (without saving to a file)
-add_if_max {element} : add a new element to the collection if its value is greater than the value of the largest element in this collection
-add_if_min {element} : add a new element to the collection if its value is less than the smallest element in this collection
-remove_greater {element} : remove from the collection all elements greater than the given one
-remove_all_by_position position : remove from the collection all elements whose position field value is equivalent to the given one
-remove_any_by_salary salary : Remove one element from the collection whose salary field value is equivalent to the given one
-print_descending : Print the elements of a collection in descending order
+10. add_if_max {element} : add a new element to the collection if its value is greater than the value of the largest element in this collection
+11. add_if_min {element} : add a new element to the collection if its value is less than the smallest element in this collection
+12. remove_greater {element} : remove from the collection all elements greater than the given one
+13. remove_all_by_position position : remove from the collection all elements whose position field value is equivalent to the given one
+14. remove_any_by_salary salary : Remove one element from the collection whose salary field value is equivalent to the given one
+15. print_descending : Print the elements of a collection in descending order
 
 #### Command input format:
 
